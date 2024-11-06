@@ -1,4 +1,4 @@
-#!/user/bin/env python3
+#!/usr/bin/env python3
 """
 This module contains a method called filter_datum that returns the
 log message obfuscated

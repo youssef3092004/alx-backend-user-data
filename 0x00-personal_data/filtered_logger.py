@@ -69,6 +69,7 @@ def main():
     cursor.close()
     db.close()
 
+
 class RedactingFormatter(logging.Formatter):
     """
         Redacting Formatter class

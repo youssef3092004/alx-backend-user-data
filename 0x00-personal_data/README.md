@@ -1,33 +1,46 @@
 # Personal Data
 
-This project is focused on handling personal data in a secure and efficient manner. The following topics are covered:
+This project focuses on implementing secure personal data handling in Python. Each file contains specific implementations for data privacy and security.
 
-## Table of Contents
-1. Introduction
-2. Data Privacy Principles
-3. Data Encryption
-4. Secure Storage
-5. Access Control
-6. Data Anonymization
-7. Compliance and Regulations
+## Files
 
-## Introduction
-Understanding the importance of personal data and the best practices for managing it.
+### [encrypt_password.py](./encrypt_password.py)
+- Implements password encryption using bcrypt
+- Functions for hashing and validating passwords
+- Secure password storage implementation
 
-## Data Privacy Principles
-Key principles to ensure data privacy and protection.
+### [filtered_logger.py](./filtered_logger.py)
+- Logging system with PII data filtering
+- RedactingFormatter class for secure logging
+- Functions to handle sensitive data in logs
+- Pattern matching for PII detection
 
-## Data Encryption
-Techniques and tools for encrypting personal data to prevent unauthorized access.
+### [main.py](./main.py)
+- Main testing file
+- Examples of usage for the implemented functions
+- Demonstration of data privacy features
 
-## Secure Storage
-Best practices for securely storing personal data.
+## Requirements
+- Python 3.7+
+- bcrypt
+- mysql-connector-python
+- mysqlclient
 
-## Access Control
-Methods for controlling access to personal data to ensure only authorized personnel can access it.
+## Usage
+```python
+# Example of password encryption
+from encrypt_password import hash_password
+password = hash_password("my_password")
 
-## Data Anonymization
-Approaches to anonymize personal data to protect individual identities.
+# Example of filtered logging
+from filtered_logger import filter_datum
+fields = ["password", "email"]
+filtered_data = filter_datum(fields, '***', message, separator)
+```
 
-## Compliance and Regulations
-Overview of relevant laws and regulations governing personal data protection.
+## Environment Variables
+- `PERSONAL_DATA_DB_USERNAME`: Database username
+- `PERSONAL_DATA_DB_PASSWORD`: Database password
+- `PERSONAL_DATA_DB_HOST`: Database host
+- `PERSONAL_DATA_DB_NAME`: Database name
+

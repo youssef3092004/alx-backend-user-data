@@ -10,6 +10,7 @@ import logging
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
+
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
     """ Returns a log message obfuscated """
@@ -23,13 +24,15 @@ def get_logger() -> logging.Logger:
     """
         Returns a logging object
     """
-    logger = logging.getLogger("user_data") # create a logger object
+    logger = logging.getLogger("user_data")  # create a logger object
     logger.setLevel(logging.INFO)   # set the log level to INFO
     logger.propagate = False    # set the propagate to False
     handler = logging.StreamHandler()  # this will out put to the console :)
-    handler.setFormatter(RedactingFormatter(PII_FIELDS))    # set the formatter to the RedactingFormatter
+    # set the formatter to the RedactingFormatter
+    handler.setFormatter(RedactingFormatter(PII_FIELDS))
     logger.addHandler(handler)  # add the handler to the logger
     return logger   # return the logger object
+
 
 class RedactingFormatter(logging.Formatter):
     """

@@ -9,20 +9,32 @@ class Auth:
     """ Auth class for handling authentication in the API """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ Checks if the path requires authentication """
-        if path in excluded_paths:
-            return False
-        if path is None:
+        """ Method for validating if endpoint requires auth """
+        if path is None or excluded_paths is None or excluded_paths == []:
             return True
-        if not path.endswith('/'):
-            path += '/'
-        for excluded_path in excluded_paths:
-            if not excluded_path.endswith('/'):
-                excluded_path += '/'
-        if path == excluded_path:
-            return False
-        if excluded_paths is None or not excluded_paths:
+
+        l_path = len(path)
+        if l_path == 0:
             return True
+
+        slash_path = True if path[l_path - 1] == '/' else False
+
+        tmp_path = path
+        if not slash_path:
+            tmp_path += '/'
+
+        for exc in excluded_paths:
+            l_exc = len(exc)
+            if l_exc == 0:
+                continue
+
+            if exc[l_exc - 1] != '*':
+                if tmp_path == exc:
+                    return False
+            else:
+                if exc[:-1] == path[:l_exc - 1]:
+                    return False
+
         return True
 
 

@@ -20,7 +20,7 @@ class BasicAuth(Auth):
 
     def decode_base64_authorization_header(
             self, base64_authorization_header: str) -> str:
-        """ Basic Authentication Class """
+        """ Decodes the value of a base64 string """
         if base64_authorization_header is None or not isinstance(
                 base64_authorization_header, str):
             return None
@@ -30,3 +30,17 @@ class BasicAuth(Auth):
             return decode_byets.decode('utf-8')  # decode bytes to utf-8 string
         except Exception:
             return None
+
+    def extract_user_credentials(self, decoded_base64_authorization_header: str) -> (str, str):
+        """
+        Returns the user email and password from the
+        Base64 decoded value
+        """
+        if decoded_base64_authorization_header is None or not isinstance(
+                decoded_base64_authorization_header, str):
+            return None, None
+        if ':' not in decoded_base64_authorization_header:
+            return None, None
+        for i in range(len(decoded_base64_authorization_header)):
+            if decoded_base64_authorization_header[i] == ':':
+                return decoded_base64_authorization_header[:i], decoded_base64_authorization_header[i + 1:]

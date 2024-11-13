@@ -47,7 +47,7 @@ class BasicAuth(Auth):
         x = decoded_base64_authorization_header
         for i in range(len(x)):
             if x[i] == ':':
-                return x[:  
+                return x[:
                          i], x[i + 1:]
 
     def user_object_from_credentials(
@@ -67,6 +67,7 @@ class BasicAuth(Auth):
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
+        """ overloads Auth and retrieves the User instance for a request """
         if self.authorization_header(request) is None:
             return None
         encoded = self.extract_base64_authorization_header(

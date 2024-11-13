@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""BasicAuth module"""
+""" Module of Basic Authentication
+"""
 from auth import Auth
 
 
 class BasicAuth(Auth):
-    """ BasicAuth class"""
+    """ Basic Authentication Class """
 
     def extract_base64_authorization_header(
             self, authorization_header: str) -> str:

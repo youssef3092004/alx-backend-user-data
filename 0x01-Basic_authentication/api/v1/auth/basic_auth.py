@@ -42,7 +42,8 @@ class BasicAuth(Auth):
             return None, None
         if ':' not in decoded_base64_authorization_header:
             return None, None
-        for i in range(len(decoded_base64_authorization_header)):
-            if decoded_base64_authorization_header[i] == ':':
-                return decoded_base64_authorization_header[:
-                                                           i], decoded_base64_authorization_header[i + 1:]
+        x = decoded_base64_authorization_header
+        for i in range(len(x)):
+            if x[i] == ':':
+                return x[:
+                         i], x[i + 1:]

@@ -8,7 +8,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from typing import TypeVar
 from user import Base, User
 
-from user import Base   
+from user import Base
 
 
 class DB:

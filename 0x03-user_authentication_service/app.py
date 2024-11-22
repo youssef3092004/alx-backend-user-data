@@ -108,7 +108,7 @@ def get_reset_password_token() -> str:
 
 
 @app.route('/reset_password', methods=['PUT'])
-def update_password(self, email: str, reset_token: str, new_password: str) -> None:
+def update_password():
     """ PUT /reset_password
     JSON Body:
       - email

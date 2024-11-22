@@ -118,16 +118,17 @@ def update_password(self, email: str, reset_token: str, new_password: str) -> No
       - message
     """
     try:
-      email = request.form.get('email')
-      reset_token = request.form.get('reset_token')
-      new_password = request.form.get('new_password')
+        email = request.form['email']
+        reset_token = request.form['reset_token']
+        new_password = request.form['new_password']
     except KeyError:
-        abort(403)
+        abort(400)
     try:
-      Auth.update_password(reset_token, new_password)
+        Auth.update_password(reset_token, new_password)
     except ValueError:
         abort(403)
     return jsonify({"email": email, "message": "Password updated"}), 200
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")

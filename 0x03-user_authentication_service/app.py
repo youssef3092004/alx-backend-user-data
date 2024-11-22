@@ -39,5 +39,23 @@ def register_user() -> str:
         return jsonify({"message": "email already registered"})
 
 
+@app.route('/sessions', methods=['POST'], strict_slashes=False)
+def login() -> str:
+    """ POST /sessions
+    JSON Body:
+      - email
+      - password
+    Return:
+      - redirect to /
+    """
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if not AUTH.valid_login(email, password):
+        abort(401)
+    session_id = AUTH.create_session(email)
+    response = jsonify({"email": email, "message": "logged in"})
+    response.set_cookie("session_id", session_id)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")

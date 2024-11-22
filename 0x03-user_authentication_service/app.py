@@ -70,7 +70,7 @@ def logout() -> str:
     if user is None:
         abort(403)
     Auth.destroy_session(user.id)
-    return redirect('/')
+    return redirect('/').set_cookie('session_id', '', expires=0)
 
 
 if __name__ == "__main__":

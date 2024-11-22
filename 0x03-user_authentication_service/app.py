@@ -108,7 +108,7 @@ def get_reset_password_token() -> str:
 
 
 @app.route('/reset_password', methods=['PUT'])
-def update_password():
+def update_password() -> str:
     """ PUT /reset_password
     JSON Body:
       - email
@@ -124,7 +124,7 @@ def update_password():
     except KeyError:
         abort(400)
     try:
-        Auth.update_password(reset_token, new_password)
+        AUTH.update_password(reset_token, new_password)
     except ValueError:
         abort(403)
     return jsonify({"email": email, "message": "Password updated"}), 200
